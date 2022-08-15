@@ -2,8 +2,6 @@ import os
 import telebot
 from dotenv import load_dotenv
 
-from telebot.storage import StateRedisStorage
-
 from flows.callbacks import Callbacks
 from flows.main_menu import main_menu
 from flows.angels.angels import angels_handler
@@ -16,9 +14,7 @@ load_dotenv()
 
 bot_token = os.getenv('bot_token')
 
-state_storage = StateRedisStorage()  # you can init here another storage
-bot = telebot.TeleBot(
-    bot_token, state_storage=state_storage)
+bot = telebot.TeleBot(bot_token)
 
 
 @bot.message_handler(commands=['s', 'start', 'help'])

@@ -1,6 +1,7 @@
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from flows.callbacks import Callbacks
 from models.User import User
+from planfix.planfix import create_pro_bono_task
 
 user_dict = {}
 bot_dict = {}
@@ -71,3 +72,4 @@ def set_phone(message):
     user.phone = phone
     bot_dict[chat_id].send_message(
         chat_id, pro_bono_site_message, reply_markup=pro_bono_site())
+    create_pro_bono_task(user.name, user.phone)

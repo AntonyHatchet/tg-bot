@@ -14,8 +14,10 @@ class Callbacks(Enum):
     consultation_pension = 2.7
     consultation_other = 2.8
     consultation_type_personal = 2.9
-    consultation_type_phone = 2.10
+    consultation_type_phone = 2.16
     consultation_type_letter = 2.11
+    consultation_type_letter_yes = 2.16
+    consultation_type_letter_no = 2.17
     consultation_phone_price_other = 2.12
     consultation_phone_price_self = 2.13
     consultation_personal_price_other = 2.14

@@ -2,6 +2,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from flows.callbacks import Callbacks
 from flows.main_menu import main_menu
 from models.User import User
+from planfix.planfix import create_club_task
 
 user_dict = {}
 bot_dict = {}
@@ -57,5 +58,8 @@ def send_request(message):
     user = user_dict[chat_id]
     phone = message.text
     user.phone = phone
+    # bot_dict[chat_id].send_message(
+    #     chat_id, "Оплатить подписку 990 рублей в месяц")
+    create_club_task(user.name, user.phone)
     bot_dict[chat_id].send_message(
-        chat_id, "Оплатить подписку 990 рублей в месяц")
+        chat_id, "Спасибо за ваш интерес, мы с вами свяжемся в ближайшее время")

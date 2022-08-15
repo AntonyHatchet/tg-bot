@@ -2,6 +2,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from flows.callbacks import Callbacks
 from flows.main_menu import main_menu
 from models.User import User
+from planfix.planfix import create_faq_task
 
 user_dict = {}
 bot_dict = {}
@@ -32,7 +33,6 @@ def other_faq():
 
 def other_faq_handler(bot, call):
     chat_id = call.message.chat.id
-    print(call.data)
     if call.data == Callbacks.other_faq.name:
         user_dict[chat_id] = User(call.message.text)
         bot_dict[chat_id] = bot
@@ -90,4 +90,4 @@ def send_request(chat_id):
     bot_dict[chat_id].send_message(
         chat_id, "На странице,вы сможете найти бесплатные и платные гайды, подкасты, видео и курсы Егора Редина", reply_markup=markup)
     user = user_dict[chat_id]
-    print(user.name, user.phone, user.job)
+    create_faq_task(user.name, user.phone, user.job)

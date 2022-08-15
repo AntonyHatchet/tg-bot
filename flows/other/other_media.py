@@ -2,6 +2,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from flows.callbacks import Callbacks
 from flows.main_menu import main_menu
 from models.User import User
+from planfix.planfix import create_payment_media_task
 
 user_dict = {}
 bot_dict = {}
@@ -64,5 +65,6 @@ def set_phone(message):
     user = user_dict[chat_id]
     phone = message.text
     user.phone = phone
+    create_payment_media_task(user.phone, user.name)
     bot_dict[chat_id].send_message(
         chat_id, thanks_message, reply_markup=main_menu())

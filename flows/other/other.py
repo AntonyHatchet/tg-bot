@@ -48,9 +48,11 @@ def other_handler(bot, call):
     if call.data == Callbacks.other.name:
         bot.send_message(call.message.chat.id,
                          "Выберете категорию", reply_markup=other())
+        return
     if call.data == Callbacks.other_subscribe.name:
         bot.send_message(call.message.chat.id,
                          "Выберете на какой канал вы хотите подписаться?", reply_markup=subscribe())
+        return
     if call.data == Callbacks.other_jobs.name:
         markup = InlineKeyboardMarkup()
         markup.row_width = 1
@@ -60,6 +62,7 @@ def other_handler(bot, call):
         )
         bot.send_message(call.message.chat.id,
                          job_message, reply_markup=markup)
+        return
 
     other_media_handler(bot, call)
     other_faq_handler(bot, call)

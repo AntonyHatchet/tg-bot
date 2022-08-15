@@ -2,6 +2,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from flows.callbacks import Callbacks
 from flows.main_menu import main_menu
 from models.User import User
+from planfix.planfix import create_cooperation_task
 
 user_dict = {}
 bot_dict = {}
@@ -73,5 +74,6 @@ def send_request(message):
     user = user_dict[chat_id]
     phone = message.text
     user.phone = phone
+    create_cooperation_task(user.name, user.phone, user.cooperation)
     bot_dict[chat_id].send_message(
         chat_id, "Благодарим вас за заявку. Егор Редин свяжется с вами в ближайшее время.", reply_markup=main_menu())

@@ -1,6 +1,7 @@
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from flows.callbacks import Callbacks
 from models.User import User
+from planfix.planfix import create_angels_task
 
 user_dict = {}
 bot_dict = {}
@@ -16,7 +17,7 @@ message = "Мы можем предложить судебную защиту в
 angels_site_message = "Для получения более детальной информации вы можете перейти на сайт проекта Ангелыправа.рф"
 
 
-def pro_bono():
+def angels():
     markup = InlineKeyboardMarkup()
     markup.row_width = 1
     markup.add(
@@ -28,7 +29,7 @@ def pro_bono():
     return markup
 
 
-def pro_bono_site():
+def angels_site():
     markup = InlineKeyboardMarkup()
     markup.row_width = 1
     markup.add(
@@ -40,10 +41,10 @@ def pro_bono_site():
     return markup
 
 
-def pro_bono_handler(bot, call):
+def angels_handler(bot, call):
     if call.data == Callbacks.angels.name:
         bot.send_message(call.message.chat.id,
-                         message, reply_markup=pro_bono())
+                         message, reply_markup=angels())
     if call.data == Callbacks.angels_yes.name:
         chat_id = call.message.chat.id
         user_dict[chat_id] = User(call.message.text)
@@ -70,4 +71,5 @@ def set_phone(message):
     phone = message.text
     user.phone = phone
     bot_dict[chat_id].send_message(
-        chat_id, angels_site_message, reply_markup=pro_bono_site())
+        chat_id, angels_site_message, reply_markup=angels_site())
+    create_angels_task(user.name, user.phone)

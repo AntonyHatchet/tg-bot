@@ -13,7 +13,7 @@ def main_menu():
         InlineKeyboardButton("PRO BONO (бесплатная поддержка граждан)",
                              callback_data=Callbacks.pro_bono.name),
         InlineKeyboardButton("Ангелы Права (защита бизнеса)",
-                             callback_data=Callbacks.about.name),
+                             callback_data=Callbacks.angels.name),
         InlineKeyboardButton(
             "Другие вопросы", callback_data=Callbacks.other.name),
     )

@@ -44,7 +44,7 @@ def create_pro_bono_task(name, phone):
     description = f"Имя: {name}" \
         f"<br/>Телефон: {phone}"
 
-    send_request(title, description)
+    send_request(title, description, 1212)
 
 
 def create_angels_task(name, phone):
@@ -52,7 +52,7 @@ def create_angels_task(name, phone):
     description = f"Имя: {name}" \
         f"<br/>Телефон: {phone}"
 
-    send_request(title, description)
+    send_request(title, description, 1214)
 
 
 def create_faq_task(name, phone, job):
@@ -89,7 +89,7 @@ def create_cooperation_task(name, phone, cooperation):
     send_request(title, description)
 
 
-def send_request(title, description):
+def send_request(title, description, template):
     headers = {
         'accept': 'application/json',
         'Authorization': f'Bearer {auth_token}',
@@ -99,6 +99,9 @@ def send_request(title, description):
     json_data = {
         'name': title,
         'description': description,
+        "template": {
+            "id": template
+        }
     }
     response = requests.post(
         'https://egorredin.planfix.ru/rest/task/', headers=headers, json=json_data)
